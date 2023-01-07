@@ -1,3 +1,4 @@
+
 const express = require('express')
 const Joi = require('joi')
 const Contact = require('../../models/contacts')
@@ -28,8 +29,10 @@ const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 })
 
+
 router.get('/', authorize, async (req, res, next) => {
   try {
+
     const result = await Contact.find({}, 'name email phone')
     res.json(result)
   } catch (error) {
@@ -47,8 +50,10 @@ router.get('/:contactId', authorize, async (req, res, next) => {
     res.json(result)
   } catch (error) {
     next(error)
+
   }
 })
+
 
 router.post('/', authorize, async (req, res, next) => {
   try {
@@ -120,5 +125,7 @@ router.patch('/:contactId/favorite', authorize, async (req, res, next) => {
     next(error)
   }
 })
+
+
 
 module.exports = router
